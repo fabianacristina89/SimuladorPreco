@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  preco_compra: 9.99
+  aliquota_icms: 9.99
+  ip: 9.99
+  st: 9.99
+  outros_custos: 9.99
+  icms: 9.99
+  produto_vpsa_id: 1
+  preco_vpsa: 9.99
+  preco_calculado: 9.99
+
+two:
+  preco_compra: 9.99
+  aliquota_icms: 9.99
+  ip: 9.99
+  st: 9.99
+  outros_custos: 9.99
+  icms: 9.99
+  produto_vpsa_id: 1
+  preco_vpsa: 9.99
+  preco_calculado: 9.99

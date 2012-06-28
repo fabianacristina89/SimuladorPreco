@@ -1,0 +1,62 @@
+<%= form_for @simulacao_produto, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :preco_compra, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :preco_compra, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :aliquota_icms, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :aliquota_icms, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :ip, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :ip, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :st, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :st, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :outros_custos, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :outros_custos, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :icms, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :icms, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :produto_vpsa_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :produto_vpsa_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :preco_vpsa, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :preco_vpsa, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :preco_calculado, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :preco_calculado, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                simulacao_produtos_path, :class => 'btn' %>
+  </div>
+<% end %>

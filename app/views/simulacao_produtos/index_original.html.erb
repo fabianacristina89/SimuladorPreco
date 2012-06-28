@@ -1,0 +1,50 @@
+<%- model_class = SimulacaoProduto.new.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:preco_compra) %></th>
+      <th><%= model_class.human_attribute_name(:aliquota_icms) %></th>
+      <th><%= model_class.human_attribute_name(:ip) %></th>
+      <th><%= model_class.human_attribute_name(:st) %></th>
+      <th><%= model_class.human_attribute_name(:outros_custos) %></th>
+      <th><%= model_class.human_attribute_name(:icms) %></th>
+      <th><%= model_class.human_attribute_name(:produto_vpsa_id) %></th>
+      <th><%= model_class.human_attribute_name(:preco_vpsa) %></th>
+      <th><%= model_class.human_attribute_name(:preco_calculado) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @simulacao_produtos.each do |simulacao_produto| %>
+      <tr>
+        <td><%= link_to simulacao_produto.id, simulacao_produto_path(simulacao_produto) %></td>
+        <td><%= simulacao_produto.preco_compra %></td>
+        <td><%= simulacao_produto.aliquota_icms %></td>
+        <td><%= simulacao_produto.ip %></td>
+        <td><%= simulacao_produto.st %></td>
+        <td><%= simulacao_produto.outros_custos %></td>
+        <td><%= simulacao_produto.icms %></td>
+        <td><%= simulacao_produto.produto_vpsa_id %></td>
+        <td><%= simulacao_produto.preco_vpsa %></td>
+        <td><%= simulacao_produto.preco_calculado %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_simulacao_produto_path(simulacao_produto), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      simulacao_produto_path(simulacao_produto),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_simulacao_produto_path,
+            :class => 'btn btn-primary' %>

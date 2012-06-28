@@ -1,0 +1,38 @@
+<%- model_class = SimulacaoProduto.new.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:preco_compra) %></th>
+      <th><%= model_class.human_attribute_name(:aliquota_icms) %></th>
+      <th><%= model_class.human_attribute_name(:ip) %></th>
+      <th><%= model_class.human_attribute_name(:st) %></th>
+      <th><%= model_class.human_attribute_name(:outros_custos) %></th>
+      <th><%= model_class.human_attribute_name(:icms) %></th>
+      <th><%= model_class.human_attribute_name(:preco_calculado) %></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% @produtos.each do |produto| %>
+      <tr>
+       <td><%= produto["descricao"] %></td>
+        <td><%= text_field :preco_compra, :style=>'width: 10px;'%></td>
+        <td><%=  %></td>
+        <td><%= %></td>
+        <td><%= %></td>
+        <td><%= %></td>
+        <td><%= %></td>
+        <td><%= %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_simulacao_produto_path,
+            :class => 'btn btn-primary' %>
