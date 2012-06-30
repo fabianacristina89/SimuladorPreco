@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 #douglas
+#douglas2
 
 ActiveRecord::Schema.define(:version => 20120628003529) do
 
