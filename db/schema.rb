@@ -10,6 +10,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
+#douglas
 
 ActiveRecord::Schema.define(:version => 20120628003529) do
 
