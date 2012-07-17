@@ -15,6 +15,7 @@ class SimulacaoProdutosController < ApplicationController
           encontrou = false;
           prod = SimulacaoProduto.new
           prod.descricao = produto["descricao"]
+          prod.produto_vpsa_id = produto["id"]
       
            todos.each do |simulacao|
         
@@ -29,7 +30,7 @@ class SimulacaoProdutosController < ApplicationController
                    prod.preco_calculado = simulacao.preco_calculado
                    prod.preco_vpsa = produto["preco"]
                    prod.preco_compra = simulacao.preco_compra
-                   prod.produto_vpsa_id = produto["id"]
+                   
                    
 
                end

@@ -32,6 +32,7 @@
         <td><%= f.text_field :outros_custos, :class => 'text_field', :style => 'width:60px;' %></td>
         <td><%= f.text_field :icms, :class => 'text_field', :style => 'width:60px;' %></td>
         <td><%= f.text_field :preco_calculado, :class => 'text_field', :style => 'width:60px;' %></td>
+		<%= f.hidden_field :produto_vpsa_id, :value => produto["produto_vpsa_id"] %>
         <td>
 		  <div class="form-actions">
 		    <%= f.submit nil, :class => 'btn btn-primary' %>
