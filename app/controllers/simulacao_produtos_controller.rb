@@ -4,8 +4,41 @@ class SimulacaoProdutosController < ApplicationController
   # GET /simulacao_produtos
   # GET /simulacao_produtos.json
   def index
-    @simulacao_produtos = SimulacaoProduto.all
+    
+    @lista_final = Array.new
     @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/showroom/1/produtos")
+    todos = SimulacaoProduto.all
+    
+    
+    
+     @produtos.each do |produto|
+          encontrou = false;
+          prod = SimulacaoProduto.new
+          prod.descricao = produto["descricao"]
+      
+           todos.each do |simulacao|
+        
+               if simulacao.produto_vpsa_id == produto["id"] then
+                   @encontrou = true
+                 
+                   
+                   prod.ip = simulacao.ip
+                   prod.aliquota_icms = simulacao.aliquota_icms
+                   prod.icms = simulacao.icms
+                   prod.outros_custos = simulacao.outros_custos
+                   prod.preco_calculado = simulacao.preco_calculado
+                   prod.preco_vpsa = produto["preco"]
+                   prod.preco_compra = simulacao.preco_compra
+                   prod.produto_vpsa_id = produto["id"]
+                   
+
+               end
+        
+          end
+      prod.existe = encontrou
+      @lista_final << prod
+      
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,7 +76,10 @@ class SimulacaoProdutosController < ApplicationController
   # POST /simulacao_produtos
   # POST /simulacao_produtos.json
   def create
-    @simulacao_produto = SimulacaoProduto.new(params[:simulacao_produto])
+    
+    prod = params[:simulacao_produto];
+  
+    @simulacao_produto = SimulacaoProduto.new(prod)
 
     respond_to do |format|
       if @simulacao_produto.save

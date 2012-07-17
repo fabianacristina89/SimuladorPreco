@@ -10,10 +10,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
-#douglas
-#douglas2
 
-ActiveRecord::Schema.define(:version => 20120628003529) do
+ActiveRecord::Schema.define(:version => 20120717005809) do
 
   create_table "simulacao_produtos", :force => true do |t|
     t.decimal  "preco_compra"
@@ -27,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20120628003529) do
     t.decimal  "preco_calculado"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "descricao"
+    t.boolean  "existe"
   end
 
 end
