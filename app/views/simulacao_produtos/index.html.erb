@@ -103,10 +103,10 @@ function formatNumber(number, digits, decimalPlaces, withCommas)
         <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :st, :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
         <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :outros_custos, :class => 'text_field', :style => 'width:60px;' %></div></td>
         <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :icms, :class => 'text_field', :style => 'width:60px;' %></div></td>
-        <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_calculado, :class => 'text_field', :style => 'width:60px;' %></div>
+        <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_calculado, :class => 'text_field', :style => 'width:60px;' , :disabled=> true%></div>
 	        <%= f.hidden_field :produto_vpsa_id, :value => produto["produto_vpsa_id"] %>
 	    </td>
-	    <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_vpsa, :class => 'text_field', :style => 'width:60px;' %></div></td>
+	    <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_vpsa, :class => 'text_field', :style => 'width:60px;', :disabled=> true%></div></td>
 		
         <td>
 		  <div class="form-actions">
