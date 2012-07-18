@@ -97,7 +97,7 @@ function formatNumber(number, digits, decimalPlaces, withCommas)
       <div class="control-group"> 
      <tr>
        <td><%= produto["descricao"] %> - <%= produto["produto_vpsa_id"] %></td>
-       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_compra,:id => "precoCompra", :class => 'text_field', :style => 'width:60px;', :onblur => "this.value = formatNumber(this.value,0,2,true);"%></td>
+       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_compra,:id => "precoCompra", :class => 'text_field', :style => 'width:60px;', :onkeyup => "this.value = formatNumber(this.value,0,2,true);"%></td>
         <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :aliquota_icms, :class => 'text_field', :style => 'width:60px;'%><span class="add-on">%</span></div></td>
         <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :ip, :class => 'text_field' , :style => 'width:60px;' %><span class="add-on">%</span></div></td>
         <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :st, :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
