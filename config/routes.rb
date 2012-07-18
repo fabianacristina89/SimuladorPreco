@@ -1,4 +1,6 @@
 SimuladorPreco::Application.routes.draw do
+  get "tutorial/index"
+
   get "home/index"
 
   resources :simulacao_produtos
@@ -7,7 +9,7 @@ SimuladorPreco::Application.routes.draw do
   # first created -> highest priority.
 
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+     match 'tutorial' => 'tutorial#index'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
