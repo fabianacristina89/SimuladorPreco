@@ -3,9 +3,80 @@
 
 -%>
 
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
+<script>
+$('#navbar').scrollspy()
+
+$('#precoCompra').keyup(function() {
+ alert("Key up detected");
+});
+
+function formatNumber(number, digits, decimalPlaces, withCommas)
+{
+        number       = number.toString();
+    var simpleNumber = '';
+
+    // Strips out the dollar sign and commas.
+    for (var i = 0; i < number.length; ++i)
+    {
+        if ("0123456789.".indexOf(number.charAt(i)) >= 0)
+            simpleNumber += number.charAt(i);
+    }
+
+    number = parseFloat(simpleNumber);
+
+    if (isNaN(number))      number     = 0;
+    if (withCommas == null) withCommas = false;
+    if (digits     == 0)    digits     = 1;
+
+    var integerPart = (decimalPlaces > 0 ? Math.floor(number) : Math.round(number));
+    var string      = "";
+
+    for (var i = 0; i < digits || integerPart > 0; ++i)
+    {
+        // Insert a comma every three digits.
+        if (withCommas && string.match(/^\d\d\d/))
+            string = "." + string;
+
+        string      = (integerPart % 10) + string;
+        integerPart = Math.floor(integerPart / 10);
+    }
+
+    if (decimalPlaces > 0)
+    {
+        number -= Math.floor(number);
+        number *= Math.pow(10, decimalPlaces);
+
+        string += "," + formatNumber(number, decimalPlaces, 0);
+    }
+
+    return string;
+}
+
+
+</script>
+
+<body data-spy="scroll">
+	
+	
+
+
+
+	<header class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a href="#" class="brand">Simulador de Precos</a>
+			 	<ul class="nav">
+				 	<li><a href="#">Home</a></li>
+				 	<li><a href="#">Simular</a></li>
+				 	<li><a href="#">Ajuda</a></li>
+				 	<li><a href="#">Sobre</a></li>
+				 	<li><a href="http://www.vpsa.com.br">VPSA</a></li>
+			 	</ul>
+		   </div>
+	    </div>
+    </header>
+</body>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -17,22 +88,26 @@
       <th><%= model_class.human_attribute_name(:outros_custos) %></th>
       <th><%= model_class.human_attribute_name(:icms) %></th>
       <th><%= model_class.human_attribute_name(:preco_calculado) %></th>
-      
+      <th><%= model_class.human_attribute_name(:preco_vpsa) %></th>
     </tr>
   </thead>
   <tbody>
     <% @lista_final.each do |produto| %>
      <%= form_for produto, :html => { :class => 'form-horizontal' } do |f| %>
-      <tr>
+      <div class="control-group"> 
+     <tr>
        <td><%= produto["descricao"] %> - <%= produto["produto_vpsa_id"] %></td>
-        <td><%= f.text_field :preco_compra, :class => 'text_field', :style => 'width:60px;' %></td>
-        <td><%= f.text_field :aliquota_icms, :class => 'text_field', :style => 'width:60px;'%></td>
-        <td><%= f.text_field :ip, :class => 'text_field' , :style => 'width:60px;' %></td>
-        <td><%= f.text_field :st, :class => 'text_field', :style => 'width:60px;' %></td>
-        <td><%= f.text_field :outros_custos, :class => 'text_field', :style => 'width:60px;' %></td>
-        <td><%= f.text_field :icms, :class => 'text_field', :style => 'width:60px;' %></td>
-        <td><%= f.text_field :preco_calculado, :class => 'text_field', :style => 'width:60px;' %></td>
-		<%= f.hidden_field :produto_vpsa_id, :value => produto["produto_vpsa_id"] %>
+       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_compra,:id => "precoCompra", :class => 'text_field', :style => 'width:60px;', :onblur => "this.value = formatNumber(this.value,0,2,true);"%></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :aliquota_icms, :class => 'text_field', :style => 'width:60px;'%><span class="add-on">%</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :ip, :class => 'text_field' , :style => 'width:60px;' %><span class="add-on">%</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :st, :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :outros_custos, :class => 'text_field', :style => 'width:60px;' %></div></td>
+        <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :icms, :class => 'text_field', :style => 'width:60px;' %></div></td>
+        <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_calculado, :class => 'text_field', :style => 'width:60px;' %></div>
+	        <%= f.hidden_field :produto_vpsa_id, :value => produto["produto_vpsa_id"] %>
+	    </td>
+	    <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_vpsa, :class => 'text_field', :style => 'width:60px;' %></div></td>
+		
         <td>
 		  <div class="form-actions">
 		    <%= f.submit nil, :class => 'btn btn-primary' %>
@@ -40,6 +115,7 @@
 	</td>
 
       </tr>
+    </div>
      <% end %>
     <% end %>
   </tbody>
