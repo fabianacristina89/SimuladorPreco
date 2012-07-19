@@ -5,7 +5,7 @@ class SimulacaoProdutosController < ApplicationController
   # GET /simulacao_produtos.json
   
   def index
-    @base = 'showroom'
+    @base = 'base24'
     @entidade = 1
     @lista_final = Array.new
     #@produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{@base}/#{@entidade}/produtos")

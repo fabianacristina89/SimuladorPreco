@@ -1,18 +1,28 @@
-<%= form_for(@simulacao, :remote => true) do |f_simulacao| %>
-  
+<%= form_for(@simulacao, :remote => true, :html=>{:class => "form-inline"}) do |f_simulacao| %>
+  <table>
+    <tr>
+      <td width='250px'>
+        <%= f_simulacao.label :total_despesas, :style => 'width:130px;' %>
+        <%= f_simulacao.text_field :total_despesas, :style => 'width:60px;' %>
+      </td>
+       <td>
+           <%= f_simulacao.label :margem_lucro, :style => 'width:130px;' %>
+            <%= f_simulacao.text_field :margem_lucro, :style => 'width:60px;' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f_simulacao.label :total_receitas, :style => 'width:130px;'  %>
+        <%= f_simulacao.text_field :total_receitas,:style => 'width:60px;' %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+    </tr>
+  </table>
 
-  <div class="field">
-    <%= f_simulacao.label :total_despesas %><br />
-    <%= f_simulacao.text_field :total_despesas %>
-  </div>
-  <div class="field">
-    <%= f_simulacao.label :total_receitas %><br />
-    <%= f_simulacao.text_field :total_receitas %>
-  </div>
-  <div class="field">
-    <%= f_simulacao.label :margem_lucro %><br />
-    <%= f_simulacao.text_field :margem_lucro %>
-  </div>
+  
   
   <div class="actions">
     <%= f_simulacao.submit 'salvar',:class => 'btn btn-primary'%>
