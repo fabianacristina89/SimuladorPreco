@@ -10,79 +10,7 @@ $('#precoCompra').keyup(function() {
  alert("Key up detected");
 });
 
- function formatar(teclapres, objeto){
-var v = objeto.value;	
-var tecla = teclapres.keyCode;
-var vernegativo = false;
-var fazBurley = 0;
-var exp;
-var casasD = 2;
-var separadorDecimal = ",";
-var separadorMilhar = ".";
 
-/*if(tecla == Keyboard.SHIFT || tecla == Keyboard.CONTROL)
-return;*/
-
-if(objeto.value.indexOf("-") != -1)
-{
-vernegativo = true;
-}
-else
-{
-vernegativo = false;
-}
-v = v.replace(/\D/g,""); //Fazendo a substituíção de que é Não-Dígito para NADA;
-if(v.length > casasD){
-var valorEsquerda = v.substr(0,v.length - casasD);
-valorEsquerda = parseInt(valorEsquerda).toString();
-v = valorEsquerda + v.substr(v.length - casasD,v.length)
-}
-if(v.length <= (casasD + 6))
-fazBurley = 1;
-else
-fazBurley = Math.floor((v.length - casasD - 1) / 3);
-v = v.substr(0,objeto.maxChars);
-exp = new RegExp("(\\d{" + casasD +"}\\b)");
-v = v.replace(exp,(separadorDecimal + "$1")); //Encontrando os últimos 2 dígitos e concatenando o separador decimal;
-var strExpPonto = "(\\d{1,3})(\\d{3})+";
-var strReplace = "";
-for(var i=2; i<=fazBurley;i++)
-{
-strExpPonto = strExpPonto.concat("(.\\d{2})+");
-}
-for(var i=1; i<=fazBurley;i++)
-{
-strReplace = strReplace.concat("$" + i.toString() + separadorMilhar);
-}
-strExpPonto = strExpPonto.concat("(.\\d{2})");
-strReplace = strReplace.concat("$" + (fazBurley + 1).toString() + "$" + (fazBurley + 2).toString());
-exp = new RegExp(strExpPonto,"gm");
-v = v.replace(exp,strReplace);
-objeto.value = v; //Retornando o valor para o campo no HTML
-
-if(negativo == true)	
-{	
-if(tecla == 109 || tecla == 189)
-{
-objeto.value = objeto.value.replace("-","");
-objeto.value = "-"+ objeto.value;
-}	
-else
-{	
-if(vernegativo == true)
-{
-objeto.value = objeto.value.replace("-","");
-objeto.value = "-"+ objeto.value;
-}
-if(tecla == 107 || tecla == 187)
-{
-objeto.value = objeto.value.replace("-","");
-}
-}
-}
-if(/* Utils.parseCurrencyToFloat(super.text) != new Number(0) && */ tecla != Keyboard.TAB)
-objeto.setSelection(objeto.value.length,objeto.value.length);
-}
 
 
 </script>
@@ -152,7 +80,10 @@ objeto.setSelection(objeto.value.length,objeto.value.length);
 
         <td>
       <div class="form-actions">
-        <%= f.submit nil, :class => 'btn btn-primary' %>
+	
+
+        <%= f.submit "Salvar", :type => :image, :src => "../assets/images/rails.png" %>
+		
       </div>
   </td>
 
