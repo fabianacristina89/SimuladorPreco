@@ -4,9 +4,10 @@ class SimulacaoProdutosController < ApplicationController
   # GET /simulacao_produtos
   # GET /simulacao_produtos.json
   def index
-    
+    @base = 'showroom'
+    @entidade = 1
     @lista_final = Array.new
-    @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/showroom/1/produtos")
+    @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{@base}/#{@entidade}/produtos")
     todos = SimulacaoProduto.all
     
     
