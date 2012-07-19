@@ -10,46 +10,78 @@ $('#precoCompra').keyup(function() {
  alert("Key up detected");
 });
 
-function formatNumber(number, digits, decimalPlaces, withCommas)
+ function formatar(teclapres, objeto){
+var v = objeto.value;	
+var tecla = teclapres.keyCode;
+var vernegativo = false;
+var fazBurley = 0;
+var exp;
+var casasD = 2;
+var separadorDecimal = ",";
+var separadorMilhar = ".";
+
+/*if(tecla == Keyboard.SHIFT || tecla == Keyboard.CONTROL)
+return;*/
+
+if(objeto.value.indexOf("-") != -1)
 {
-        number       = number.toString();
-    var simpleNumber = '';
+vernegativo = true;
+}
+else
+{
+vernegativo = false;
+}
+v = v.replace(/\D/g,""); //Fazendo a substituíção de que é Não-Dígito para NADA;
+if(v.length > casasD){
+var valorEsquerda = v.substr(0,v.length - casasD);
+valorEsquerda = parseInt(valorEsquerda).toString();
+v = valorEsquerda + v.substr(v.length - casasD,v.length)
+}
+if(v.length <= (casasD + 6))
+fazBurley = 1;
+else
+fazBurley = Math.floor((v.length - casasD - 1) / 3);
+v = v.substr(0,objeto.maxChars);
+exp = new RegExp("(\\d{" + casasD +"}\\b)");
+v = v.replace(exp,(separadorDecimal + "$1")); //Encontrando os últimos 2 dígitos e concatenando o separador decimal;
+var strExpPonto = "(\\d{1,3})(\\d{3})+";
+var strReplace = "";
+for(var i=2; i<=fazBurley;i++)
+{
+strExpPonto = strExpPonto.concat("(.\\d{2})+");
+}
+for(var i=1; i<=fazBurley;i++)
+{
+strReplace = strReplace.concat("$" + i.toString() + separadorMilhar);
+}
+strExpPonto = strExpPonto.concat("(.\\d{2})");
+strReplace = strReplace.concat("$" + (fazBurley + 1).toString() + "$" + (fazBurley + 2).toString());
+exp = new RegExp(strExpPonto,"gm");
+v = v.replace(exp,strReplace);
+objeto.value = v; //Retornando o valor para o campo no HTML
 
-    // Strips out the dollar sign and commas.
-    for (var i = 0; i < number.length; ++i)
-    {
-        if ("0123456789.".indexOf(number.charAt(i)) >= 0)
-            simpleNumber += number.charAt(i);
-    }
-
-    number = parseFloat(simpleNumber);
-
-    if (isNaN(number))      number     = 0;
-    if (withCommas == null) withCommas = false;
-    if (digits     == 0)    digits     = 1;
-
-    var integerPart = (decimalPlaces > 0 ? Math.floor(number) : Math.round(number));
-    var string      = "";
-
-    for (var i = 0; i < digits || integerPart > 0; ++i)
-    {
-        // Insert a comma every three digits.
-        if (withCommas && string.match(/^\d\d\d/))
-            string = "." + string;
-
-        string      = (integerPart % 10) + string;
-        integerPart = Math.floor(integerPart / 10);
-    }
-
-    if (decimalPlaces > 0)
-    {
-        number -= Math.floor(number);
-        number *= Math.pow(10, decimalPlaces);
-
-        string += "," + formatNumber(number, decimalPlaces, 0);
-    }
-
-    return string;
+if(negativo == true)	
+{	
+if(tecla == 109 || tecla == 189)
+{
+objeto.value = objeto.value.replace("-","");
+objeto.value = "-"+ objeto.value;
+}	
+else
+{	
+if(vernegativo == true)
+{
+objeto.value = objeto.value.replace("-","");
+objeto.value = "-"+ objeto.value;
+}
+if(tecla == 107 || tecla == 187)
+{
+objeto.value = objeto.value.replace("-","");
+}
+}
+}
+if(/* Utils.parseCurrencyToFloat(super.text) != new Number(0) && */ tecla != Keyboard.TAB)
+objeto.setSelection(objeto.value.length,objeto.value.length);
 }
 
 
@@ -106,13 +138,13 @@ function formatNumber(number, digits, decimalPlaces, withCommas)
       <div class="control-group"> 
      <tr>
        <td><%= produto["descricao"] %> - <%= produto["produto_vpsa_id"] %></td>
-       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_compra,:id => "precoCompra", :class => 'text_field', :style => 'width:60px;', :onkeyup => "this.value = formatNumber(this.value,0,2,true);"%></td>
-        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :icms, :class => 'text_field', :style => 'width:60px;'%><span class="add-on">%</span></div></td>
-        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :ipi, :class => 'text_field' , :style => 'width:60px;' %><span class="add-on">%</span></div></td>
-        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :outros_impostos, :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
-        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :comissao, :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
-        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :frete, :class => 'text_field', :style => 'width:60px;' %><span class="add-on">R$</span></div></td>
-        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :outros_custos, :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
+       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_compra,:id => "precoCompra", :class => 'text_field', :style => 'width:60px;', :onkeyup => "this.value = formatar(event,this);"%></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :icms, :class => 'text_field', :style => 'width:60px;', :onkeyup => "this.value = formatar(event,this);"%><span class="add-on">%</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :ipi, :onkeyup => "this.value = formatar(event,this);" , :class => 'text_field' , :style => 'width:60px;' %><span class="add-on">%</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :outros_impostos, :onkeyup => "this.value = formatar(event,this);", :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :comissao, :onkeyup => "this.value = formatar(event,this);", :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :frete, :onkeyup => "this.value = formatar(event,this);", :class => 'text_field', :style => 'width:60px;' %><span class="add-on">R$</span></div></td>
+        <td style="white-space:nowrap;"><div class="input-append"><%= f.text_field :outros_custos, :onkeyup => "this.value = formatar(event,this);", :class => 'text_field', :style => 'width:60px;' %><span class="add-on">%</span></div></td>
         <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_calculado, :class => 'text_field', :style => 'width:60px;' , :disabled=> true%></div>
           <%= f.hidden_field :produto_vpsa_id, :value => produto["produto_vpsa_id"] %>
       </td>
