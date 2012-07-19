@@ -9,8 +9,9 @@ class SimulacaoProdutosController < ApplicationController
     @base = 'showroom'
     @entidade = 53
     @lista_final = Array.new
+    #@produtos = Array.new
     @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{@base}/#{@entidade}/produtos")
-    # @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/showroom/1/produtos")
+   
     
     todos = SimulacaoProduto.all
     
