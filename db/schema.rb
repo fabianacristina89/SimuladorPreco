@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719010657) do
+ActiveRecord::Schema.define(:version => 20120719223922) do
 
   create_table "simulacao_produtos", :force => true do |t|
     t.decimal  "preco_compra"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120719010657) do
     t.string   "base"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.decimal  "despesas_fixas"
   end
 
 end
