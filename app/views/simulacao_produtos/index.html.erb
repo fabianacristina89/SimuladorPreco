@@ -79,12 +79,12 @@ $('#precoCompra').keyup(function() {
       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_vpsa, :class => 'text_field', :style => 'width:60px;', :disabled=> true%></div></td>
 
         <td>
-      <div class="form-actions">
+
+	
 	
 
-        <%= f.submit "Salvar", :type => :image, :src => "../assets/images/rails.png" %>
-		
-      </div>
+        <%=  image_submit_tag("salvarAzul32.png", :class => "botao_env")%>
+
   </td>
 
       </tr>
