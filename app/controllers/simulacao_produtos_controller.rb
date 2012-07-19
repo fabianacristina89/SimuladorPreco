@@ -1,5 +1,6 @@
 class SimulacaoProdutosController < ApplicationController
      include HTTParty
+     include ActionView::Helpers::NumberHelper
 
   # GET /simulacao_produtos
   # GET /simulacao_produtos.json
@@ -25,7 +26,8 @@ class SimulacaoProdutosController < ApplicationController
           prod = SimulacaoProduto.new
           prod.descricao = produto["descricao"]
           prod.produto_vpsa_id = produto["id"]
-          prod.preco_vpsa = produto["preco"]
+          prod.preco_vpsa =  number_to_currency(produto["preco"], :unit => "", :separator => ",", :delimiter => ".")
+         
       
            todos.each do |simulacao|
         
