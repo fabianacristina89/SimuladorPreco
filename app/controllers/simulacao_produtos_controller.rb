@@ -123,7 +123,7 @@ class SimulacaoProdutosController < ApplicationController
   # PUT /simulacao_produtos/1.json
   def update
     @simulacao_produto = SimulacaoProduto.find(params[:id])
-
+    
     respond_to do |format|
       if @simulacao_produto.update_attributes(params[:simulacao_produto])
         format.html { redirect_to @simulacao_produto, notice: 'Simulacao produto was successfully updated.' }
