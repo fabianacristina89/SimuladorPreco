@@ -3,18 +3,21 @@ class SimulacaoProdutosController < ApplicationController
 
   # GET /simulacao_produtos
   # GET /simulacao_produtos.json
+  
   def index
     @base = 'showroom'
     @entidade = 1
     @lista_final = Array.new
-    @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{@base}/#{@entidade}/produtos")
+    #@produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{@base}/#{@entidade}/produtos")
+     @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/showroom/1/produtos")
+    
     todos = SimulacaoProduto.all
+    
     @simulacao  = Simulacao.last
     if @simulacao == nil
       @simulacao = Simulacao.new
     end
     @simulacao.base = @base
-    
     
     
      @produtos.each do |produto|
@@ -30,9 +33,11 @@ class SimulacaoProdutosController < ApplicationController
                    @encontrou = true
                  
                    
-                   prod.ip = simulacao.ip
-                   prod.aliquota_icms = simulacao.aliquota_icms
+                   prod.ipi = simulacao.ipi
                    prod.icms = simulacao.icms
+                   prod.outros_impostos = simulacao.outros_impostos
+                   prod.comissao = simulacao.comissao
+                   prod.frete= simulacao.frete
                    prod.outros_custos = simulacao.outros_custos
                    prod.preco_calculado = simulacao.preco_calculado
                    
