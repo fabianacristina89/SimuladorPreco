@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  total_despesas: 9.99
+  total_receitas: 9.99
+  margem_lucro: 9.99
+  base: MyString
+
+two:
+  total_despesas: 9.99
+  total_receitas: 9.99
+  margem_lucro: 9.99
+  base: MyString

@@ -1,0 +1,21 @@
+<%= form_for(@simulacao, :remote => true) do |f_simulacao| %>
+  
+
+  <div class="field">
+    <%= f_simulacao.label :total_despesas %><br />
+    <%= f_simulacao.text_field :total_despesas %>
+  </div>
+  <div class="field">
+    <%= f_simulacao.label :total_receitas %><br />
+    <%= f_simulacao.text_field :total_receitas %>
+  </div>
+  <div class="field">
+    <%= f_simulacao.label :margem_lucro %><br />
+    <%= f_simulacao.text_field :margem_lucro %>
+  </div>
+  
+  <div class="actions">
+    <%= f_simulacao.submit 'salvar',:class => 'btn btn-primary'%>
+  </div>
+  
+<% end %>

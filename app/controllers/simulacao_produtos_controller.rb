@@ -9,6 +9,11 @@ class SimulacaoProdutosController < ApplicationController
     @lista_final = Array.new
     @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{@base}/#{@entidade}/produtos")
     todos = SimulacaoProduto.all
+    @simulacao  = Simulacao.last
+    if @simulacao == nil
+      @simulacao = Simulacao.new
+    end
+    @simulacao.base = @base
     
     
     
@@ -71,6 +76,8 @@ class SimulacaoProdutosController < ApplicationController
     end
   end
 
+
+
   # GET /simulacao_produtos/1/edit
   def edit
     @simulacao_produto = SimulacaoProduto.find(params[:id])
@@ -86,6 +93,23 @@ class SimulacaoProdutosController < ApplicationController
 
     respond_to do |format|
       if @simulacao_produto.save
+        format.html { redirect_to @simulacao_produto, notice: 'Simulacao produto was successfully created.' }
+        format.json { render json: @simulacao_produto, status: :created, location: @simulacao_produto }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @simulacao_produto.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_simulacao
+    
+    prod = params[:simulacao];
+  
+    @simulacao = Simulacao.new(prod)
+
+    respond_to do |format|
+      if @simulacao.save
         format.html { redirect_to @simulacao_produto, notice: 'Simulacao produto was successfully created.' }
         format.json { render json: @simulacao_produto, status: :created, location: @simulacao_produto }
       else

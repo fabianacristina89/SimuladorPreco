@@ -1,0 +1,29 @@
+<h1>Listing simulacaos</h1>
+
+<table>
+  <tr>
+    <th>Total despesas</th>
+    <th>Total receitas</th>
+    <th>Margem lucro</th>
+    <th>Base</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @simulacaos.each do |simulacao| %>
+  <tr>
+    <td><%= simulacao.total_despesas %></td>
+    <td><%= simulacao.total_receitas %></td>
+    <td><%= simulacao.margem_lucro %></td>
+    <td><%= simulacao.base %></td>
+    <td><%= link_to 'Show', simulacao %></td>
+    <td><%= link_to 'Edit', edit_simulacao_path(simulacao) %></td>
+    <td><%= link_to 'Destroy', simulacao, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Simulacao', new_simulacao_path %>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Total despesas:</b>
+  <%= @simulacao.total_despesas %>
+</p>
+
+<p>
+  <b>Total receitas:</b>
+  <%= @simulacao.total_receitas %>
+</p>
+
+<p>
+  <b>Margem lucro:</b>
+  <%= @simulacao.margem_lucro %>
+</p>
+
+<p>
+  <b>Base:</b>
+  <%= @simulacao.base %>
+</p>
+
+
+<%= link_to 'Edit', edit_simulacao_path(@simulacao) %> |
+<%= link_to 'Back', simulacaos_path %>
