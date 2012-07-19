@@ -36,7 +36,7 @@ class SimulacaoProduto < ActiveRecord::Base
                   end
                   
                   def preco_calculado
-                    number_to_currency(attributes['preco_calculado'], :separator => ",", :delimiter => ".");
+                   number_to_currency(attributes['preco_calculado'], :separator => ",", :delimiter => ".");
                   end
 
  

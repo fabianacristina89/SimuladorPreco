@@ -3,7 +3,7 @@
 function calcular(){
   var total_despesas = parseFloat(document.getElementById('simulacao_total_despesas').value);
   var total_receitas = parseFloat(document.getElementById('simulacao_total_receitas').value);
-  var resultado = (total_despesas/total_receitas).toFixed(2);
+  var resultado = (total_despesas/total_receitas*100).toFixed(2);
   document.getElementById('simulacao_despesas_fixas').value = resultado;
   
 }
@@ -12,17 +12,17 @@ function calcular(){
     <tr>
       <td width='250px'>
         <%= f_simulacao.label :total_despesas, :style => 'width:130px;' %>
-        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :style => 'width:60px;' %>
+        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :style => 'width:60px;',:onkeyup=>'calcular()' %></div>
       </td>
        <td>
            <%= f_simulacao.label :margem_lucro, :style => 'width:130px;' %>
-            <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :margem_lucro, :style => 'width:60px;' %>
+            <div class="input-append"><%= f_simulacao.text_field :margem_lucro, :style => 'width:60px;' %><span class="add-on">%</span></div>
       </td>
     </tr>
     <tr>
       <td>
         <%= f_simulacao.label :total_receitas, :style => 'width:130px;'  %>
-        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_receitas,:style => 'width:60px;', :onkeyup=>'calcular()' %>
+        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_receitas,:style => 'width:60px;', :onkeyup=>'calcular()' %></div>
       </td>
     </tr>
     <tr>

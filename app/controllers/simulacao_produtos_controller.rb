@@ -21,6 +21,7 @@ class SimulacaoProdutosController < ApplicationController
     end
     @simulacao.base = @base
     
+    simulacao2  = Simulacao.last
     
      @produtos.each do |produto|
           encontrou = false;
@@ -42,9 +43,14 @@ class SimulacaoProdutosController < ApplicationController
                    prod.comissao = simulacao.comissao
                    prod.frete= simulacao.frete
                    prod.outros_custos = simulacao.outros_custos
-                   prod.preco_calculado = simulacao.preco_calculado
-                   
                    prod.preco_compra = simulacao.preco_compra
+                   
+                   
+                   markup =  100 - 
+                   (prod.icms.to_f + prod.ipi.to_f + prod.outros_impostos.to_f + prod.frete.to_f + 
+                   prod.comissao.to_f + prod.outros_custos.to_f + simulacao2.despesas_fixas.to_f + simulacao2.margem_lucro.to_f)
+                   
+                   prod.preco_calculado = number_to_currency(prod.preco_compra.to_f / (markup / 100), :unit => "", :separator => ",", :delimiter => ".") 
                    
                    
 
