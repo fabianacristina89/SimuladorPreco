@@ -21,7 +21,7 @@ class SimulacaoProdutosController < ApplicationController
     end
     @simulacao.base = @base
     
-    simulacao2  = Simulacao.last
+    
     
      @produtos.each do |produto|
           encontrou = false;
@@ -45,12 +45,7 @@ class SimulacaoProdutosController < ApplicationController
                    prod.outros_custos = simulacao.outros_custos
                    prod.preco_compra = simulacao.preco_compra
                    
-                   
-                   markup =  100 - 
-                   (prod.icms.to_f + prod.ipi.to_f + prod.outros_impostos.to_f + prod.frete.to_f + 
-                   prod.comissao.to_f + prod.outros_custos.to_f + simulacao2.despesas_fixas.to_f + simulacao2.margem_lucro.to_f)
-                   
-                   prod.preco_calculado = number_to_currency(prod.preco_compra.to_f / (markup / 100), :unit => "", :separator => ",", :delimiter => ".") 
+                   prod.preco_calculado = calcular_preco(prod, @simulacao)
                    
                    
 
@@ -66,6 +61,13 @@ class SimulacaoProdutosController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @simulacao_produtos }
     end
+  end
+  def calcular_preco (simulacao_produto, simulacao)
+      markup =  100 - 
+                   (simulacao_produto.icms.to_f + simulacao_produto.ipi.to_f + simulacao_produto.outros_impostos.to_f + simulacao_produto.frete.to_f + 
+                   simulacao_produto.comissao.to_f + simulacao_produto.outros_custos.to_f + simulacao.despesas_fixas.to_f + simulacao.margem_lucro.to_f)
+      number_to_currency(simulacao_produto.preco_compra.to_f / (markup / 100), :unit => "", :separator => ",", :delimiter => ".") 
+
   end
 
   # GET /simulacao_produtos/1
