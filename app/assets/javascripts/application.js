@@ -18,7 +18,7 @@
 
  function formatar(teclapres, objeto){
 var v = objeto.value;	
-var tecla = teclapres.keyCode;
+var tecla = teclapres==null?null:teclapres.keyCode;
 var vernegativo = false;
 var fazBurley = 0;
 var exp;
@@ -69,7 +69,7 @@ objeto.value = v; //Retornando o valor para o campo no HTML
 var negativo = false;
 if(negativo == true)	
 {	
-if(tecla == 109 || tecla == 189)
+if(tecla != null && (tecla == 109 || tecla == 189))
 {
 objeto.value = objeto.value.replace("-","");
 objeto.value = "-"+ objeto.value;
@@ -81,7 +81,7 @@ if(vernegativo == true)
 objeto.value = objeto.value.replace("-","");
 objeto.value = "-"+ objeto.value;
 }
-if(tecla == 107 || tecla == 187)
+if(tecla != null && (tecla == 107 || tecla == 187))
 {
 objeto.value = objeto.value.replace("-","");
 }

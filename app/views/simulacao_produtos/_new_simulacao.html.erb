@@ -1,30 +1,33 @@
 <%= form_for(@simulacao, :remote => true, :html=>{:class => "form-inline"}) do |f_simulacao| %>
 <script>
-function calcular(event){
+function calcular(event, input){
   var total_despesas = parseFloat(document.getElementById('simulacao_total_despesas').value);
   var total_receitas = parseFloat(document.getElementById('simulacao_total_receitas').value);
   var resultado = (total_despesas/total_receitas*100).toFixed(2);
   document.getElementById('simulacao_despesas_fixas').value = resultado;
 
-  recalcularTabelaDePrecos(event);
+  formatar(event, input);
   
+}
+function onSubmitForm(){
+  recalcularTabelaDePrecos(null);
 }
 </script>
   <table>
     <tr>
       <td width='250px'>
         <%= f_simulacao.label :total_despesas, :style => 'width:130px;' %>
-        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :style => 'width:60px;',:onkeyup=>'calcular(event)' %></div>
+        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :style => 'width:60px;',:onkeyup=>'calcular(event, this)' %></div>
       </td>
        <td>
            <%= f_simulacao.label :margem_lucro, :style => 'width:130px;' %>
-            <div class="input-append"><%= f_simulacao.text_field :margem_lucro, :style => 'width:60px;', :onkeyup=>'recalcularTabelaDePrecos(event);' %><span class="add-on">%</span></div>
+            <div class="input-append"><%= f_simulacao.text_field :margem_lucro, :style => 'width:60px;', :onkeyup=>'formatar(event, this);' %><span class="add-on">%</span></div>
       </td>
     </tr>
     <tr>
       <td>
         <%= f_simulacao.label :total_receitas, :style => 'width:130px;'  %>
-        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_receitas,:style => 'width:60px;', :onkeyup=>'calcular(event)' %></div>
+        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_receitas,:style => 'width:60px;', :onkeyup=>'calcular(event,this)' %></div>
       </td>
     </tr>
     <tr>
@@ -40,7 +43,7 @@ function calcular(event){
   
   
   <div class="actions">
-    <%= f_simulacao.submit 'salvar',:class => 'btn btn-primary'%>
+    <%= f_simulacao.submit 'salvar',:class => 'btn btn-primary', :onclick=>'onSubmitForm()'%>
   </div>
   
 <% end %>
