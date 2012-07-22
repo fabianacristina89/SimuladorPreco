@@ -1,5 +1,5 @@
 class SimulacaoProdutosController < ApplicationController
-     include HTTParty
+     
      include ActionView::Helpers::NumberHelper
 
   # GET /simulacao_produtos
