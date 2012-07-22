@@ -66,6 +66,7 @@ exp = new RegExp(strExpPonto,"gm");
 v = v.replace(exp,strReplace);
 objeto.value = v; //Retornando o valor para o campo no HTML
 
+var negativo = false;
 if(negativo == true)	
 {	
 if(tecla == 109 || tecla == 189)
@@ -86,6 +87,6 @@ objeto.value = objeto.value.replace("-","");
 }
 }
 }
-if(/* Utils.parseCurrencyToFloat(super.text) != new Number(0) && */ tecla != Keyboard.TAB)
-objeto.setSelection(objeto.value.length,objeto.value.length);
+/*if( Utils.parseCurrencyToFloat(super.text) != new Number(0) &&  tecla != Keyboard.TAB)
+	objeto.setSelection(objeto.value.length,objeto.value.length);*/
 }

@@ -69,7 +69,11 @@ class SimulacaoProdutosController < ApplicationController
       number_to_currency(simulacao_produto.preco_compra.to_f / (markup / 100), :unit => "", :separator => ",", :delimiter => ".") 
 
   end
-
+  def atualizar_valor
+     @produtos.each do |produto|
+        prod.preco_calculado = calcular_preco(prod, @simulacao)
+    end
+  end
   # GET /simulacao_produtos/1
   # GET /simulacao_produtos/1.json
   def show
@@ -111,6 +115,7 @@ class SimulacaoProdutosController < ApplicationController
       if @simulacao_produto.save
         format.html { redirect_to @simulacao_produto, notice: 'Simulacao produto was successfully created.' }
         format.json { render json: @simulacao_produto, status: :created, location: @simulacao_produto }
+        #atualizar_valor
       else
         format.html { render action: "new" }
         format.json { render json: @simulacao_produto.errors, status: :unprocessable_entity }
@@ -144,6 +149,7 @@ class SimulacaoProdutosController < ApplicationController
       if @simulacao_produto.update_attributes(params[:simulacao_produto])
         format.html { redirect_to @simulacao_produto, notice: 'Simulacao produto was successfully updated.' }
         format.json { head :no_content }
+        #atualizar_valor
       else
         format.html { render action: "edit" }
         format.json { render json: @simulacao_produto.errors, status: :unprocessable_entity }
