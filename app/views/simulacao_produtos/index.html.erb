@@ -30,13 +30,13 @@ function recalcularLinha(event,tr){
   var somaPorcentagem = 0;
 
   for(var i = 0; i<arrayDespesasFixas.length; i++){
-    somaPorcentagem = somaPorcentagem + parseFloat(arrayDespesasFixas[i].value)
+    somaPorcentagem = somaPorcentagem + parseCurrencyToFloat(arrayDespesasFixas[i].value)
   }
-  somaPorcentagem = somaPorcentagem + parseFloat(document.getElementById("simulacao_despesas_fixas").value);
-  somaPorcentagem = somaPorcentagem + parseFloat(document.getElementById("simulacao_margem_lucro").value);
+  somaPorcentagem = somaPorcentagem + parseCurrencyToFloat(document.getElementById("simulacao_despesas_fixas").value);
+  somaPorcentagem = somaPorcentagem + parseCurrencyToFloat(document.getElementById("simulacao_margem_lucro").value);
 
   var markup = 100 - somaPorcentagem;
-  var valor = parseFloat(tr.getElementsByClassName("preco_compra")[0].value)/(markup/100);
+  var valor = parseCurrencyToFloat(tr.getElementsByClassName("preco_compra")[0].value)/(markup/100);
 
   tr.getElementsByClassName("valor_calculado")[0].value = valor.toFixed(2);
   formatar(event,tr.getElementsByClassName("valor_calculado")[0]);

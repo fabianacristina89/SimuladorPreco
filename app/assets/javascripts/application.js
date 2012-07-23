@@ -90,3 +90,22 @@ objeto.value = objeto.value.replace("-","");
 /*if( Utils.parseCurrencyToFloat(super.text) != new Number(0) &&  tecla != Keyboard.TAB)
 	objeto.setSelection(objeto.value.length,objeto.value.length);*/
 }
+
+function parseFloatToCurrency(vlr){
+	if(vlr == '' || vlr == null){
+		return '';
+	}else{
+		vlr = vlr.replace(",","");	
+		vlr = vlr.replace(".",",");
+		return parseFloat(vlr);
+	}
+}
+function parseCurrencyToFloat(vlr){
+	if(vlr == '' || vlr == null){
+		return 0;
+	}else{
+		vlr = vlr.replace(".","");	
+		vlr = vlr.replace(",",".");
+		return parseFloat(vlr);
+	}
+}

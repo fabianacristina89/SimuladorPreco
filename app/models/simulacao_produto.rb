@@ -9,6 +9,9 @@ class SimulacaoProduto < ActiveRecord::Base
                   def preco_compra
                     number_to_currency(attributes['preco_compra'], :unit => "", :separator => ",", :delimiter => ".");
                   end
+                  def icms
+                    number_to_currency(attributes['icms'], :unit => "", :separator => ",", :delimiter => ".");
+                  end
                   
                   
                   def ipi
