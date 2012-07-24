@@ -1,11 +1,12 @@
 class Simulacao < ActiveRecord::Base
 	include ActionView::Helpers::NumberHelper
 
-  attr_accessible :base, :margem_lucro,  :total_despesas, :total_receitas, :despesas_fixas
+  attr_accessible :base, :margem_lucro,  :total_despesas,
+   :total_receitas, :despesas_fixas;
 
-   def margem_lucro
+    def margem_lucro
 	    number_to_currency(attributes['margem_lucro'], :unit => "", :separator => ",", :delimiter => ".");
-	  end
+	end
 	def total_despesas
 	    number_to_currency(attributes['total_despesas'], :unit => "", :separator => ",", :delimiter => ".");
 	end
