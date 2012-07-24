@@ -3,8 +3,3 @@
 
 en:
   hello: "Hello world"
-  number:
-    format:     
-      separator: ','
-      delimiter: '.'
-      precision: 2
