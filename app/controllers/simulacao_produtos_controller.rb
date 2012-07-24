@@ -2,17 +2,31 @@ class SimulacaoProdutosController < ApplicationController
      
      include ActionView::Helpers::NumberHelper
 
+     require 'yaml'
+     caches_action :listar_produtos_vpsa
+
   # GET /simulacao_produtos
   # GET /simulacao_produtos.json
-  
+  def listar_produtos_vpsa(base, entidade)
+
+    if(Rails.cache.read('cache.ProdutoVpsa') == nil)
+      retorno = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{base}/#{entidade}/produtos") 
+      Rails.cache.write('cache.ProdutoVpsa', retorno.to_yaml)
+      puts("cacheado#{Rails.cache.read('cache.ProdutoVpsa')}")
+    end
+
+    YAML::load(Rails.cache.read('cache.ProdutoVpsa'))
+     
+  end
+
   def index
     @base = 'showroom'
     @entidade = 53
     @lista_final = Array.new
-    #@produtos = Array.new
-    @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{@base}/#{@entidade}/produtos")
+    @produtos = listar_produtos_vpsa(@base, @entidade);
    
-    
+
+
     todos = SimulacaoProduto.all
     
     @simulacao  = Simulacao.last
