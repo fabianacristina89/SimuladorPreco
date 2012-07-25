@@ -6,6 +6,7 @@
     <th>Total receitas</th>
     <th>Margem lucro</th>
     <th>Base</th>
+    <th>Despesas Fixas %</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= simulacao.total_receitas %></td>
     <td><%= simulacao.margem_lucro %></td>
     <td><%= simulacao.base %></td>
+    <td><%= simulacao.despesas_fixas %></td>
     <td><%= link_to 'Show', simulacao %></td>
     <td><%= link_to 'Edit', edit_simulacao_path(simulacao) %></td>
     <td><%= link_to 'Destroy', simulacao, method: :delete, data: { confirm: 'Are you sure?' } %></td>
