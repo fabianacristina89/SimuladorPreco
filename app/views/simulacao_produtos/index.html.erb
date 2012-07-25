@@ -87,10 +87,17 @@ function recalcularLinha(event,tr){
 
 
 
+<table width="870" border="0" id="filtros">
+    <tr>
+      
+      <td width="300"><input id="input_nome" type="text"
+        onKeyUp="filter(this, 'lista', '0')"></td>
+      
+    </tr>
+  </table>
 
 
-
-<table class="table table-striped" >
+<table class="table table-striped" id="lista">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:nome) %></th>
