@@ -36,7 +36,7 @@ function onSubmitForm(){
     <tr>
       <td>
         <%= f_simulacao.label :despesas_fixas, :style => 'width:130px;'  %>
-        <div class="input-append"><%= f_simulacao.text_field :despesas_fixas ,:style => 'width:60px;',  :disabled=> false %><span class="add-on">%</span></div>
+        <div class="input-append"><%= f_simulacao.text_field :despesas_fixas ,:style => 'width:60px;',  :readonly => true %><span class="add-on">%</span></div>
 
        
       </td>
