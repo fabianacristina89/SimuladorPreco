@@ -121,3 +121,32 @@ function filter (phrase, _id, cellNr){
         else table.rows[r].style.display = 'none';
   }
 }
+function recalcularTabelaDePrecos(event){
+  var arrayLinhas = document.getElementById('tabela_precos').getElementsByTagName('tr');
+  for(var i = 0; i<arrayLinhas.length; i++){
+    recalcularLinha(event, arrayLinhas[i]);
+  }
+}
+
+function calcularValor(event,input, id_produto_vpsa){
+  formatar(event,input);  
+  recalcularProduto(event, id_produto_vpsa);
+
+}
+
+function recalcularProduto(event,id_produto_vpsa){
+   var arrayDespesasFixas = document.getElementsByClassName("despesa_variavel_" + id_produto_vpsa);
+  var somaPorcentagem = 0;
+
+  for(var i = 0; i<arrayDespesasFixas.length; i++){
+    somaPorcentagem = somaPorcentagem + parseCurrencyToFloat(arrayDespesasFixas[i].value)
+  }
+  somaPorcentagem = somaPorcentagem + parseCurrencyToFloat(document.getElementById("simulacao_despesas_fixas").value);
+  somaPorcentagem = somaPorcentagem + parseCurrencyToFloat(document.getElementById("simulacao_margem_lucro").value);
+
+  var markup = 100 - somaPorcentagem;
+  var valor = parseCurrencyToFloat(document.getElementsByClassName("preco_compra_"+id_produto_vpsa)[0].value)/(markup/100);
+
+  document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value = valor.toFixed(2);
+  formatar(event,tr.getElementsByClassName("valor_calculado_"+id_produto_vpsa)[0]);
+}
