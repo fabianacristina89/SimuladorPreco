@@ -16,37 +16,37 @@ function onSubmitForm(){
   recalcularTabelaDePrecos(null);
 }
 </script>
-  <table>
+<center>
+  <table class="strapless">
     <tr>
-      <td width='250px'>
-        <%= f_simulacao.label :total_despesas, :style => 'width:130px;' %>
-        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :class=>'input_valor', :style => 'width:80px;',:onkeyup=>'calcular(event, this)' %></div>
-      </td>
-       <td>
-           <%= f_simulacao.label :margem_lucro, :style => 'width:130px;' %>
-            <div class="input-append"><%= f_simulacao.text_field :margem_lucro, :class=>'input_valor',:style => 'width:80px;', :onkeyup=>'formatar(event, this);' %><span class="add-on">%</span></div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= f_simulacao.label :total_receitas, :style => 'width:130px;'  %>
+	  <td style="white-space:nowrap;">
+        <%= f_simulacao.label :total_receitas, :style => 'width:130px; color:#000000'  %>
         <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_receitas,:class=>'input_valor',:style => 'width:80px;', :onkeyup=>'calcular(event,this)' %></div>
       </td>
-    </tr>
-    <tr>
-      <td>
-        <%= f_simulacao.label :despesas_fixas, :style => 'width:130px;'  %>
+      <td width='250px' style="white-space:nowrap;">
+        &nbsp;&nbsp;<%= f_simulacao.label :total_despesas, :style => 'width:130px; color:#000000' %>
+        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :class=>'input_valor', :style => 'width:80px;',:onkeyup=>'calcular(event, this)' %></div>
+      </td>
+      <td style="white-space:nowrap;">
+        &nbsp;&nbsp;<%= f_simulacao.label :despesas_fixas, :style => 'width:130px; color:#000000'  %>
         <div class="input-append"><%= f_simulacao.text_field :despesas_fixas ,:class=>'input_valor',:style => 'width:80px;',  :readonly => true %><span class="add-on">%</span></div>
+      </td>
 
-       
+       <td style="white-space:nowrap;">
+           &nbsp;&nbsp;<%= f_simulacao.label :margem_lucro, :style => 'width:130px; color:#000000' %>
+            <div class="input-append"><%= f_simulacao.text_field :margem_lucro, :class=>'input_valor',:style => 'width:80px;', :onkeyup=>'formatar(event, this);' %><span class="add-on">%</span></div>
+      </td>
+      <td style="white-space:nowrap;">
+		  <div class="actions">
+		   &nbsp;&nbsp; <%= f_simulacao.submit 'salvar',:class => 'btn btn-primary', :onclick=>'onSubmitForm()'%>
+		  </div>       
       </td>
     </tr>
   </table>
+</center>
 
   
   
-  <div class="actions">
-    <%= f_simulacao.submit 'salvar',:class => 'btn btn-primary', :onclick=>'onSubmitForm()'%>
-  </div>
+
   
 <% end %>
