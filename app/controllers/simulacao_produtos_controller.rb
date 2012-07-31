@@ -20,8 +20,8 @@ class SimulacaoProdutosController < ApplicationController
   end
 
   def index
-    @base = 'showroom'
-    @entidade = 53
+    @base = 'base24'
+    @entidade = 1
     @lista_final = Array.new
     @produtos = listar_produtos_vpsa(@base, @entidade);
    
@@ -60,7 +60,7 @@ class SimulacaoProdutosController < ApplicationController
                    prod.preco_compra = simulacao.preco_compra
                    
                    prod.preco_calculado = calcular_preco(prod, @simulacao)
-                   
+                   puts(prod.preco_compra)
                    
 
                end
@@ -124,6 +124,8 @@ class SimulacaoProdutosController < ApplicationController
     prod = params[:simulacao_produto];
   
     @simulacao_produto = SimulacaoProduto.new(prod)
+
+    puts("Valor icms = #{@simulacao_produto.icms}")
 
     respond_to do |format|
       if @simulacao_produto.save

@@ -124,7 +124,7 @@ function filter (phrase, _id, cellNr){
 function recalcularTabelaDePrecos(event){
   var arrayLinhas = document.getElementById('tabela_precos').getElementsByTagName('tr');
   for(var i = 0; i<arrayLinhas.length; i++){
-    recalcularLinha(event, arrayLinhas[i]);
+    recalcularProduto(event, arrayLinhas[i].id.split("_")[1]);
   }
 }
 
@@ -148,5 +148,5 @@ function recalcularProduto(event,id_produto_vpsa){
   var valor = parseCurrencyToFloat(document.getElementsByClassName("preco_compra_"+id_produto_vpsa)[0].value)/(markup/100);
 
   document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value = valor.toFixed(2);
-  formatar(event,tr.getElementsByClassName("valor_calculado_"+id_produto_vpsa)[0]);
+  formatar(event,document.getElementsByClassName("valor_calculado_"+id_produto_vpsa)[0]);
 }
