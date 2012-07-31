@@ -12,7 +12,7 @@ class SimulacaoProdutosController < ApplicationController
     if(Rails.cache.read('cache.ProdutoVpsa') == nil)
       retorno = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{base}/#{entidade}/produtos") 
       Rails.cache.write('cache.ProdutoVpsa', retorno.to_yaml)
-      puts("cacheado#{Rails.cache.read('cache.ProdutoVpsa')}")
+      
     end
 
     YAML::load(Rails.cache.read('cache.ProdutoVpsa'))
@@ -20,7 +20,7 @@ class SimulacaoProdutosController < ApplicationController
   end
 
   def index
-    @base = 'base24'
+    @base = 'showroom'
     @entidade = 1
     @lista_final = Array.new
     @produtos = listar_produtos_vpsa(@base, @entidade);
@@ -60,7 +60,7 @@ class SimulacaoProdutosController < ApplicationController
                    prod.preco_compra = simulacao.preco_compra
                    
                    prod.preco_calculado = calcular_preco(prod, @simulacao)
-                   puts(prod.preco_compra)
+                   
                    
 
                end
@@ -125,8 +125,7 @@ class SimulacaoProdutosController < ApplicationController
   
     @simulacao_produto = SimulacaoProduto.new(prod)
 
-    puts("Valor icms = #{@simulacao_produto.icms}")
-
+    
     respond_to do |format|
       if @simulacao_produto.save
         format.html { redirect_to @simulacao_produto, notice: 'Simulacao produto was successfully created.' }
