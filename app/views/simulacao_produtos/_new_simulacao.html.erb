@@ -16,27 +16,25 @@ function onSubmitForm(){
   recalcularTabelaDePrecos(null);
 }
 </script>
-  <table>
+  <table class="strapless">
     <tr>
       <td width='250px'>
-        <%= f_simulacao.label :total_despesas, :style => 'width:130px;' %>
-        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :style => 'width:60px;',:onkeyup=>'calcular(event, this)' %></div>
+        <%= f_simulacao.label :total_despesas, :style => 'width:130px; color:#000000' %>
+        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_despesas, :style => 'width:90px;',:onkeyup=>'calcular(event, this)' %></div>
       </td>
        <td>
-           <%= f_simulacao.label :margem_lucro, :style => 'width:130px;' %>
+           <%= f_simulacao.label :margem_lucro, :style => 'width:130px; color:#000000' %>
             <div class="input-append"><%= f_simulacao.text_field :margem_lucro, :style => 'width:60px;', :onkeyup=>'formatar(event, this);' %><span class="add-on">%</span></div>
       </td>
-    </tr>
-    <tr>
+
       <td>
-        <%= f_simulacao.label :total_receitas, :style => 'width:130px;'  %>
-        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_receitas,:style => 'width:60px;', :onkeyup=>'calcular(event,this)' %></div>
+        <%= f_simulacao.label :total_receitas, :style => 'width:130px; color:#000000'  %>
+        <div class="input-prepend"><span class="add-on">R$</span><%= f_simulacao.text_field :total_receitas,:style => 'width:90px;', :onkeyup=>'calcular(event,this)' %></div>
       </td>
-    </tr>
-    <tr>
+
       <td>
-        <%= f_simulacao.label :despesas_fixas, :style => 'width:130px;'  %>
-        <div class="input-append"><%= f_simulacao.text_field :despesas_fixas ,:style => 'width:60px;',  :readonly => true %><span class="add-on">%</span></div>
+        <%= f_simulacao.label :despesas_fixas, :style => 'width:130px; color:#000000'  %>
+        <div class="input-append"><%= f_simulacao.text_field :despesas_fixas ,:style => 'width:90px;',  :readonly => true %><span class="add-on">%</span></div>
 
        
       </td>
