@@ -125,6 +125,13 @@ function recalcularTabelaDePrecos(event){
   var arrayLinhas = document.getElementById('tabela_precos').getElementsByTagName('tr');
   for(var i = 0; i<arrayLinhas.length; i++){
     recalcularProduto(event, arrayLinhas[i].id.split("_")[1]);
+    definirCor(arrayLinhas[i].id.split("_")[1]);
+  }
+}
+function redefinirCorTabela(){
+  var arrayLinhas = document.getElementById('tabela_precos').getElementsByTagName('tr');
+  for(var i = 0; i<arrayLinhas.length; i++){
+    definirCor(arrayLinhas[i].id.split("_")[1]);
   }
 }
 
@@ -148,5 +155,22 @@ function recalcularProduto(event,id_produto_vpsa){
   var valor = parseCurrencyToFloat(document.getElementsByClassName("preco_compra_"+id_produto_vpsa)[0].value)/(markup/100);
 
   document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value = valor.toFixed(2);
+  definirCor(id_produto_vpsa);
+  
   formatar(event,document.getElementsByClassName("valor_calculado_"+id_produto_vpsa)[0]);
+}
+function definirCor(id_produto_vpsa){
+  var valor_calculado = parseFloat(document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value);
+  var valor_vpsa = parseFloat(document.getElementsByClassName("valor_vpsa_" + id_produto_vpsa)[0].value);
+  var diferenca = (Math.abs(valor_vpsa - valor_calculado) * 100)/valor_vpsa;
+  if(diferenca > 40){
+    document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="red";
+  }else if(diferenca > 20){
+    document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="#E5E514";
+  }else{
+      document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="black";
+  
+  }
+
+  
 }
