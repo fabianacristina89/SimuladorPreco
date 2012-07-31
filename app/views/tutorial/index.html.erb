@@ -5,9 +5,9 @@
       <div class="container">
         <a href="#" class="brand">Simulador de Precos</a>
         <ul class="nav">
-        	<li><%= link_to "Home", "/home/index"  %></li>
-        	<li><%= link_to "Simular", "/simulacao_produtos"  %></li>
-        	<li><%= link_to "Ajuda", "#"  %></li>
+        	<li><%= link_to "Simulação de Preços", "/simulacao_produtos"  %></li>
+        	<li><%= link_to "Como Calcular", "/tutorial"  %></li>
+        	<li><%= link_to "Sebrae", "http://www.sebrae.com.br/momento/quero-melhorar-minha-empresa/utilize-as-ferramentas/formacao-de-precos/"  %></li>
         	<li><%= link_to "Sobre", "#"  %></li>
           <li><a href="http://www.vpsa.com.br">VPSA</a></li>
         </ul>
@@ -27,6 +27,7 @@ swiffyobject = {"tags":[{"bounds":[{"ymin":-217,"ymax":217,"xmin":-775,"xmax":77
 </head>
 <body style="margin: 0; overflow: hidden; ">
 
+<center>
 <div id="swiffycontainer" style="width: 550px; height: 400px;"></div>
 
 <script>
@@ -34,5 +35,6 @@ var stage = new swiffy.Stage(document.getElementById('swiffycontainer'), swiffyo
 stage.start();
 </script>
 
+</center>
 </body>
 </html>

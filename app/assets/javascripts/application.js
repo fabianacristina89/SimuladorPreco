@@ -166,7 +166,7 @@ function definirCor(id_produto_vpsa){
   if(diferenca > 40){
     document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="red";
   }else if(diferenca > 20){
-    document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="#E5E514";
+    document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="#E06812";
   }else{
       document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="black";
   
