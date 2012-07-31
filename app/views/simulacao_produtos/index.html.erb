@@ -57,9 +57,9 @@
 	    <h3>Impostos</h3>
 	  </div>
 	  <div class="modal-body">
-        <%= model_class.human_attribute_name(:icms) %> <div class="input-append"><%= f.text_field :icms, :class => "text_field despesa_variavel_#{produto.produto_vpsa_id}", :style => 'width:60px;', :onkeyup => "formatar(event, this);"%><span class="add-on">%</span></div>
-	    <%= model_class.human_attribute_name(:ipi) %> <div class="input-append"><%= f.text_field :ipi, :onkeyup => "formatar(event, this);" , :class => "text_field despesa_variavel_#{produto.produto_vpsa_id}" , :style => 'width:60px;' %><span class="add-on">%</span></div>
-	    <%= model_class.human_attribute_name(:outros_impostos) %> <div class="input-append"><%= f.text_field :outros_impostos, :onkeyup => "formatar(event, this);", :class => "text_field despesa_variavel_#{produto.produto_vpsa_id}", :style => 'width:60px;' %><span class="add-on">%</span></div>
+        <%= model_class.human_attribute_name(:icms) %> <div class="input-append"><%= f.text_field :icms, :class => "text_field input_valor despesa_variavel_#{produto.produto_vpsa_id}", :style => 'width:60px;', :onkeyup => "formatar(event, this);"%><span class="add-on">%</span></div>
+	    <%= model_class.human_attribute_name(:ipi) %> <div class="input-append"><%= f.text_field :ipi, :onkeyup => "formatar(event, this);" , :class => "text_field input_valor despesa_variavel_#{produto.produto_vpsa_id}" , :style => 'width:60px;' %><span class="add-on">%</span></div>
+	    <%= model_class.human_attribute_name(:outros_impostos) %> <div class="input-append"><%= f.text_field :outros_impostos, :onkeyup => "formatar(event, this);", :class => "text_field input_valor despesa_variavel_#{produto.produto_vpsa_id}", :style => 'width:60px;' %><span class="add-on">%</span></div>
 	  </div>
 	  <div class="modal-footer"> <a href="#" onclick="recalcularProduto(event, <%= produto.produto_vpsa_id %>)" class="btn" data-dismiss="modal">Fechar</a> <a href="#" onclick="recalcularProduto(event, <%= produto.produto_vpsa_id %>)" class="btn btn-primary" data-dismiss="modal">Salvar</a> </div>
 	</div>
@@ -72,23 +72,23 @@
 	  </div>
 	  <div class="modal-body">
 
-        <%= model_class.human_attribute_name(:comissao) %><div class="input-append"><%= f.text_field :comissao, :onkeyup => "calcularValor(event, this, #{produto.produto_vpsa_id});", :class => "text_field despesa_variavel_#{produto.produto_vpsa_id}", :style => "width:60px;" %><span class="add-on">%</span></div>
-        <%= model_class.human_attribute_name(:frete) %><div class="input-append"><%= f.text_field :frete, :onkeyup => "calcularValor(event, this, #{produto.produto_vpsa_id});", :class => "text_field despesa_variavel_#{produto.produto_vpsa_id}", :style => "width:60px;" %><span class="add-on">R$</span></div>
-        <%= model_class.human_attribute_name(:outros_custos) %><div class="input-append"><%= f.text_field :outros_custos, :onkeyup => "calcularValor(event, this, #{produto.produto_vpsa_id});", :class => "text_field despesa_variavel_#{produto.produto_vpsa_id}", :style => "width:60px;" %><span class="add-on">%</span></div>
+        <%= model_class.human_attribute_name(:comissao) %><div class="input-append"><%= f.text_field :comissao, :onkeyup => "calcularValor(event, this, #{produto.produto_vpsa_id});", :class => "text_field input_valor despesa_variavel_#{produto.produto_vpsa_id}", :style => "width:60px;" %><span class="add-on">%</span></div>
+        <%= model_class.human_attribute_name(:frete) %><div class="input-append"><%= f.text_field :frete, :onkeyup => "calcularValor(event, this, #{produto.produto_vpsa_id});", :class => "text_field input_valor despesa_variavel_#{produto.produto_vpsa_id}", :style => "width:60px;" %><span class="add-on">%</span></div>
+        <%= model_class.human_attribute_name(:outros_custos) %><div class="input-append"><%= f.text_field :outros_custos, :onkeyup => "calcularValor(event, this, #{produto.produto_vpsa_id});", :class => "text_field input_valor despesa_variavel_#{produto.produto_vpsa_id}", :style => "width:60px;" %><span class="add-on">%</span></div>
 	  </div>
 	   <div class="modal-footer"> <a href="#" onclick="recalcularProduto(event, <%= produto.produto_vpsa_id %>)" class="btn" data-dismiss="modal">Fechar</a> <a href="#" onclick="recalcularProduto(event, <%= produto.produto_vpsa_id %>)" class="btn btn-primary" data-dismiss="modal">Salvar</a> </div>
 	</div>
       <div class="control-group"> 
      <tr id="td_<%= produto.produto_vpsa_id %>">
        <td><%= produto["descricao"] %> - <%= produto["produto_vpsa_id"] %></td>
-       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_compra,:id => "precoCompra", :class => "text_field preco_compra_#{produto.produto_vpsa_id}", :style => "width:60px;", :onkeyup => "calcularValor(event,this, #{produto.produto_vpsa_id});" , :disabled=> false%></td>  
+       <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_compra,:id => "precoCompra", :class => "text_field input_valor preco_compra_#{produto.produto_vpsa_id}", :style => "width:60px;", :onkeyup => "calcularValor(event,this, #{produto.produto_vpsa_id});" , :disabled=> false%></td>  
 	   <td><a class="btn addIdeaBtn" data-toggle="modal" href="#addImpostos_<%= produto.produto_vpsa_id %>" >[...]</a></td>
         <td><a class="btn addIdeaBtn" data-toggle="modal" href="#addOutrosCustos_<%= produto.produto_vpsa_id %>" >[...]</a></td>
 
-        <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_calculado, :class => "text_field valor_calculado_#{produto.produto_vpsa_id}", :style => "width:60px;" , :disabled=> true%></div>
+        <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_calculado, :class => "text_field input_valor valor_calculado_#{produto.produto_vpsa_id}", :style => "width:60px;" , :disabled=> true%></div>
           <%= f.hidden_field :produto_vpsa_id, :value => produto["produto_vpsa_id"] %>
       </td>
-      <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_vpsa, :id => "preco_vpsa_#{produto.produto_vpsa_id}", :class => "text_field valor_vpsa_#{produto.produto_vpsa_id}", :style => "width:60px;", :disabled=> true%></div></td>
+      <td style="white-space:nowrap;"><div class="input-prepend"><span class="add-on">R$</span><%= f.text_field :preco_vpsa, :id => "preco_vpsa_#{produto.produto_vpsa_id}", :class => "text_field input_valor valor_vpsa_#{produto.produto_vpsa_id}", :style => "width:60px;", :disabled=> true%></div></td>
         <td><%=  image_submit_tag("salvarAzul32.png", :class => "botao_env")%></td></tr>
     </div>
      <% end %>

@@ -138,6 +138,7 @@ function redefinirCorTabela(){
 function calcularValor(event,input, id_produto_vpsa){
   formatar(event,input);  
   recalcularProduto(event, id_produto_vpsa);
+  definirCor(id_produto_vpsa);
 
 }
 
@@ -155,13 +156,12 @@ function recalcularProduto(event,id_produto_vpsa){
   var valor = parseCurrencyToFloat(document.getElementsByClassName("preco_compra_"+id_produto_vpsa)[0].value)/(markup/100);
 
   document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value = valor.toFixed(2);
-  definirCor(id_produto_vpsa);
   
   formatar(event,document.getElementsByClassName("valor_calculado_"+id_produto_vpsa)[0]);
 }
 function definirCor(id_produto_vpsa){
-  var valor_calculado = parseFloat(document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value);
-  var valor_vpsa = parseFloat(document.getElementsByClassName("valor_vpsa_" + id_produto_vpsa)[0].value);
+  var valor_calculado = parseCurrencyToFloat(document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value);
+  var valor_vpsa = parseCurrencyToFloat(document.getElementsByClassName("valor_vpsa_" + id_produto_vpsa)[0].value);
   var diferenca = (Math.abs(valor_vpsa - valor_calculado) * 100)/valor_vpsa;
   if(diferenca > 40){
     document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].style.color="red";
