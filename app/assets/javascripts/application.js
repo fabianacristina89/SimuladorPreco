@@ -138,7 +138,7 @@ function redefinirCorTabela(){
 function calcularValor(event,input, id_produto_vpsa){
   formatar(event,input);  
   recalcularProduto(event, id_produto_vpsa);
-  definirCor(id_produto_vpsa);
+  
 
 }
 
@@ -158,6 +158,7 @@ function recalcularProduto(event,id_produto_vpsa){
   document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value = valor.toFixed(2);
   
   formatar(event,document.getElementsByClassName("valor_calculado_"+id_produto_vpsa)[0]);
+  definirCor(id_produto_vpsa);
 }
 function definirCor(id_produto_vpsa){
   var valor_calculado = parseCurrencyToFloat(document.getElementsByClassName("valor_calculado_" + id_produto_vpsa)[0].value);
