@@ -23,7 +23,9 @@ class SimulacaoProdutosController < ApplicationController
     @base = 'showroom'
     @entidade = 1
     @lista_final = Array.new
-    @produtos = listar_produtos_vpsa(@base, @entidade);
+    
+    #@produtos = listar_produtos_vpsa(@base, @entidade);
+    @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/showroom/53/produtos") ;
    
 
 
