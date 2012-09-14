@@ -12,20 +12,31 @@ class SimulacaoProdutosController < ApplicationController
   def cnpj_empresa
     session[:usuario][:cnpj_empresa]
   end
+  def url_cache
+    'cache.ProdutoVpsa'<<cnpj_empresa
+  end
   def listar_produtos_vpsa()
-    if(Rails.cache.read('cache.ProdutoVpsa'<<cnpj_empresa) == nil)
+    if(Rails.cache.read(url_cache) == nil)
       retorno = listar_produtos_sem_cache()
-      Rails.cache.write('cache.ProdutoVpsa'<<cnpj_empresa, retorno.to_yaml)
+      Rails.cache.write(url_cache, retorno.to_yaml)
     end
 
-    YAML::load(Rails.cache.read('cache.ProdutoVpsa'<<cnpj_empresa))
+    YAML::load(Rails.cache.read(url_cache))
      
   end
   def listar_produtos_sem_cache()
-      HTTParty.get(URL_SERVICO_PRODUTOS + '?token='+ token) 
+      parametros = {
+        :token => token,
+        :inicio => 0,
+        :quantidade => 50
+      }
+      HTTParty.get(URL_SERVICO_PRODUTOS + '?'+ parametros.to_query) 
     
   end
 
+  def listar_simulacao_produto(produtos)
+    SimulacaoProduto.all
+  end
  # GET /simulacao_produtos
   # GET /simulacao_produtos.json
   def index
@@ -35,7 +46,7 @@ class SimulacaoProdutosController < ApplicationController
    
 
 
-    todos = SimulacaoProduto.all
+    todos = listar_simulacao_produto(@produtos)
     
     @simulacao  = Simulacao.last
     if @simulacao == nil
