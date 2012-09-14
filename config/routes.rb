@@ -3,6 +3,10 @@ SimuladorPreco::Application.routes.draw do
 
   get "home/index"
 
+  get "oauth/authorization"
+  get "oauth/callback"
+  delete "oauth/logout"
+
   resources :simulacao_produtos
   resources :simulacaos
 

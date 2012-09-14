@@ -4,28 +4,34 @@ class SimulacaoProdutosController < ApplicationController
 
      require 'yaml'
      caches_action :listar_produtos_vpsa
+     URL_SERVICO_PRODUTOS = "https://www.vpsa.com.br/apps/api/produtos"
 
-  # GET /simulacao_produtos
-  # GET /simulacao_produtos.json
-  def listar_produtos_vpsa(base, entidade)
-
-    if(Rails.cache.read('cache.ProdutoVpsa') == nil)
-      retorno = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/#{base}/#{entidade}/produtos") 
-      Rails.cache.write('cache.ProdutoVpsa', retorno.to_yaml)
-      puts('teste')
+  def token
+    session[:usuario][:access_token]
+  end
+  def cnpj_empresa
+    session[:usuario][:cnpj_empresa]
+  end
+  def listar_produtos_vpsa()
+    if(Rails.cache.read('cache.ProdutoVpsa'<<cnpj_empresa) == nil)
+      retorno = listar_produtos_sem_cache()
+      Rails.cache.write('cache.ProdutoVpsa'<<cnpj_empresa, retorno.to_yaml)
     end
 
-    YAML::load(Rails.cache.read('cache.ProdutoVpsa'))
+    YAML::load(Rails.cache.read('cache.ProdutoVpsa'<<cnpj_empresa))
      
   end
-
-  def index
-    @base = 'showroom'
-    @entidade = 1
-    @lista_final = Array.new
+  def listar_produtos_sem_cache()
+      HTTParty.get(URL_SERVICO_PRODUTOS + '?token='+ token) 
     
-    #@produtos = listar_produtos_vpsa(@base, @entidade);
-    @produtos = HTTParty.get("https://www.vpsa.com.br/estoque/rest/externo/showroom/53/produtos") ;
+  end
+
+ # GET /simulacao_produtos
+  # GET /simulacao_produtos.json
+  def index
+    @lista_final = Array.new
+    @produtos = listar_produtos_sem_cache();
+    
    
 
 
@@ -140,23 +146,7 @@ class SimulacaoProdutosController < ApplicationController
     end
   end
 
-  def create_simulacao
-    
-    prod = params[:simulacao];
   
-    @simulacao = Simulacao.new(prod)
-
-    respond_to do |format|
-      if @simulacao.save
-        format.html { redirect_to @simulacao_produto, notice: 'Simulacao produto was successfully created.' }
-        format.json { render json: @simulacao_produto, status: :created, location: @simulacao_produto }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @simulacao_produto.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PUT /simulacao_produtos/1
   # PUT /simulacao_produtos/1.json
   def update
