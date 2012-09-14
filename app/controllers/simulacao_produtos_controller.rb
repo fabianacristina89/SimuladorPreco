@@ -30,8 +30,31 @@ class SimulacaoProdutosController < ApplicationController
         :inicio => 0,
         :quantidade => 50
       }
-      HTTParty.get(URL_SERVICO_PRODUTOS + '?'+ parametros.to_query) 
-    
+      #HTTParty.get(URL_SERVICO_PRODUTOS + '?'+ parametros.to_query) 
+    Array.new
+  end
+
+  def definir_pagina(incremento)
+    puts( "pagina_sessao "<<session[:pagina_simulacao].to_s)
+    puts( "incremento " << incremento.to_s)
+
+    @pagina_atual = session[:pagina_simulacao].to_s 
+    puts("paginal_atual" << @pagina_atual.to_s)
+    if(@pagina_atual == nil)
+      @paginal_atual = 0
+    else
+      
+      @paginal_atual = (@paginal_atual.to_f+incremento).to_s
+      puts("paginal_atual" << @pagina_atual.to_s)
+    end
+    session[:pagina_simulacao] = @paginal_atual.to_f
+    puts( session[:pagina_simulacao])
+  end
+  def proxima_pagina
+    puts("incremetando")
+    definir_pagina(1)
+    session[:pagina_simulacao] = @paginal_atual 
+    redirect_to :controller=>'simulacao_produtos', :action => 'index'
   end
 
   def listar_simulacao_produto(produtos)
@@ -40,8 +63,10 @@ class SimulacaoProdutosController < ApplicationController
  # GET /simulacao_produtos
   # GET /simulacao_produtos.json
   def index
+    ##definir_pagina(0)
     @lista_final = Array.new
     @produtos = listar_produtos_sem_cache();
+    
     
    
 

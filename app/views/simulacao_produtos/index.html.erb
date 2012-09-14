@@ -38,8 +38,19 @@
         onKeyUp="filter(this, 'lista', '0')" class="input_lupa">
         <img src="/assets/lupa16.png" height="16" width="16" />
       </td>
+      <td>
+        <div class="pagination">
+        <ul>  
+          <%= link_to simulacao_produtos_proxima_pagina_path %>
+          <li><%= button_to "<<", simulacao_produtos_proxima_pagina_path %></li>
+          <li ><span><%= @pagina_atual %></span></li>
+          <li><button href="#">>></button></li>
+        </ul>
+      </td>
     </tr>
+    
   </table>
+ 
 
 <table class="table table-striped" id="lista">
   <thead>
