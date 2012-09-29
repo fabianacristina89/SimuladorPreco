@@ -30,8 +30,8 @@ class SimulacaoProdutosController < ApplicationController
         :inicio => 0,
         :quantidade => 50
       }
-      #HTTParty.get(URL_SERVICO_PRODUTOS + '?'+ parametros.to_query) 
-    Array.new
+      HTTParty.get(URL_SERVICO_PRODUTOS + '?'+ parametros.to_query) 
+    #Array.new
   end
 
   def definir_pagina(incremento)
@@ -57,30 +57,18 @@ class SimulacaoProdutosController < ApplicationController
     redirect_to :controller=>'simulacao_produtos', :action => 'index'
   end
 
-  def listar_simulacao_produto(produtos)
-    SimulacaoProduto.all
+  def listar_simulacao_produto(produtos, simulacao)
+    SimulacaoProduto.find_all_by_simulacao_id(simulacao);
   end
  # GET /simulacao_produtos
   # GET /simulacao_produtos.json
   def index
-    ##definir_pagina(0)
+    @simulacao  = Simulacao.find_or_create_by_base(cnpj_empresa)
     @lista_final = Array.new
     @produtos = listar_produtos_sem_cache();
-    
-    
-   
 
+    todos = listar_simulacao_produto(@produtos, @simulacao)
 
-    todos = listar_simulacao_produto(@produtos)
-    
-    @simulacao  = Simulacao.last
-    if @simulacao == nil
-      @simulacao = Simulacao.new
-    end
-    @simulacao.base = @base
-    
-    
-    
      @produtos.each do |produto|
           encontrou = false;
           prod = SimulacaoProduto.new
@@ -168,7 +156,7 @@ class SimulacaoProdutosController < ApplicationController
     prod = params[:simulacao_produto];
   
     @simulacao_produto = SimulacaoProduto.new(prod)
-
+    @simulacao_produto.simulacao = Simulacao.find_or_create_by_base(cnpj_empresa)
     
     respond_to do |format|
       if @simulacao_produto.save

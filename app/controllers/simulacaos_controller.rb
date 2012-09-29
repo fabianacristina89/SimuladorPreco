@@ -20,11 +20,14 @@ class SimulacaosController < ApplicationController
       format.json { render json: @simulacao }
     end
   end
-
+  def cnpj_empresa
+    session[:usuario][:cnpj_empresa]
+  end
   # GET /simulacaos/new
   # GET /simulacaos/new.json
   def new
     @simulacao = Simulacao.new
+    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +44,7 @@ class SimulacaosController < ApplicationController
   # POST /simulacaos.json
   def create
     @simulacao = Simulacao.new(params[:simulacao])
-
+    @simulacao.base = cnpj_empresa
     respond_to do |format|
       if @simulacao.save
         format.html { redirect_to @simulacao, notice: 'Simulacao was successfully created.' }
@@ -57,7 +60,7 @@ class SimulacaosController < ApplicationController
   # PUT /simulacaos/1.json
   def update
     @simulacao = Simulacao.find(params[:id])
-
+    @simulacao.base = cnpj_empresa
     respond_to do |format|
       if @simulacao.update_attributes(params[:simulacao])
         format.html { redirect_to @simulacao, notice: 'Simulacao was successfully updated.' }

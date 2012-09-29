@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719223922) do
+ActiveRecord::Schema.define(:version => 20120929125921) do
 
   create_table "simulacao_produtos", :force => true do |t|
     t.decimal  "preco_compra"
@@ -28,7 +28,10 @@ ActiveRecord::Schema.define(:version => 20120719223922) do
     t.datetime "updated_at",      :null => false
     t.string   "descricao"
     t.boolean  "existe"
+    t.integer  "simulacao_id"
   end
+
+  add_index "simulacao_produtos", ["simulacao_id"], :name => "index_simulacao_produtos_on_simulacao_id"
 
   create_table "simulacaos", :force => true do |t|
     t.decimal  "total_despesas"
