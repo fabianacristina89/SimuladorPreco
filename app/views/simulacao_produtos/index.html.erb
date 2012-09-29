@@ -13,20 +13,24 @@
 
 <table width="870" border="0" id="filtros" class="strapless">
     <tr>
-      <td width="300">
+      <td width="300" style="white-space:nowrap;">
         <input id="input_nome" type="text"
         onKeyUp="filter(this, 'lista', '0')" class="input_lupa">
         <img src="/assets/lupa16.png" height="16" width="16" />
       </td>
-      <td>
-        <div class="pagination">
-        <ul>  
-          <%= link_to simulacao_produtos_proxima_pagina_path %>
-          <li><%= button_to "<<", simulacao_produtos_proxima_pagina_path %></li>
-          <li ><span><%= @pagina_atual %></span></li>
-          <li><button href="#">>></button></li>
-        </ul>
-      </td>
+      <td style="text-align: right;">
+         <%=  
+           if @pagina_atual != "1" then
+               link_to image_tag("anterior.png", :border => 0), {:action => 'pagina_anterior', :controller => 'simulacao_produtos'} 
+		   end
+         %>
+         &nbsp;&nbsp;Página <%= @pagina_atual %>&nbsp;&nbsp;
+         <%=   
+           if @lista_final.count == 50 then
+              link_to image_tag("proximo.png", :border => 0), {:action => 'proxima_pagina', :controller => 'simulacao_produtos'}
+    	  end
+          %>
+ </td>
     </tr>
     
   </table>

@@ -41,29 +41,27 @@ class SimulacaoProdutosController < ApplicationController
 
   def definir_pagina(incremento)
 
-    @pagina_atual = session[:pagina_simulacao].to_s     
+  #@pagina_atual = session[:pagina_simulacao].to_s     
     soma = session[:pagina_simulacao].to_f;
     
-     
-    if(@pagina_atual == nil)
-      soma = 1
-    else
+
       soma = soma + incremento;
-      @paginal_atual = soma.to_s
-    end
+      #@paginal_atual = soma.to_s
+
     session[:pagina_simulacao] = soma
     puts( session[:pagina_simulacao])
   end
   
   def proxima_pagina
     definir_pagina(1)
-    session[:pagina_simulacao] = @paginal_atual 
+    
+    #session[:pagina_simulacao] = @paginal_atual 
     redirect_to :controller=>'simulacao_produtos', :action => 'index'
   end
 
   def pagina_anterior
     definir_pagina(-1)
-    session[:pagina_simulacao] = @paginal_atual 
+    #session[:pagina_simulacao] = @paginal_atual 
     redirect_to :controller=>'simulacao_produtos', :action => 'index'
   end
 
@@ -76,7 +74,7 @@ class SimulacaoProdutosController < ApplicationController
     @simulacao  = Simulacao.find_or_create_by_base(cnpj_empresa)
     @lista_final = Array.new
     @produtos = listar_produtos_sem_cache();
-    @pagina_atual = session[:pagina_simulacao].to_s
+    @pagina_atual = (session[:pagina_simulacao].to_i + 1 ).to_s
 
     todos = listar_simulacao_produto(@produtos, @simulacao)
 
