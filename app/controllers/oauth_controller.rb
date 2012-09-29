@@ -1,7 +1,8 @@
 class OauthController < ApplicationController
   
-  APP_ID = "505328d070a7df0fbc000003"
-  APP_SECRET = "8730b81e1105f8a8dedf9cad445e22e9717e35a4ae48a7791535f2e0fe49704c"
+  APP_CONFIG = YAML.load_file(Rails.root.join('config', 'config.yml'))[Rails.env]
+  APP_ID = APP_CONFIG['app_id']
+  APP_SECRET = APP_CONFIG['app_secret']
   VPSA_AUTHORIZATION_URL = "https://www.vpsa.com.br/apps/oauth/authorization"
   VPSA_TOKEN_URL = "https://www.vpsa.com.br/apps/oauth/token"
     

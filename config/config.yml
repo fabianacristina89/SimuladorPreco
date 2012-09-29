@@ -1,0 +1,20 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+development:
+  app_id: 505328d070a7df0fbc000003
+  app_secret: 8730b81e1105f8a8dedf9cad445e22e9717e35a4ae48a7791535f2e0fe49704c
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  app_id: 505328d070a7df0fbc000003
+  app_secret: 8730b81e1105f8a8dedf9cad445e22e9717e35a4ae48a7791535f2e0fe49704c
+
+
+production:
+  app_id: 505328d070a7df0fbc000003
+  app_secret: 8730b81e1105f8a8dedf9cad445e22e9717e35a4ae48a7791535f2e0fe49704c
