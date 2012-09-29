@@ -1,18 +1,6 @@
-<!doctype html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<header class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a href="#" class="brand">Simulador de Precos</a>
-        <ul class="nav">
-        	<li><%= link_to "Simulação de Preços", "/simulacao_produtos"  %></li>
-        	<li><%= link_to "Como Calcular", "/tutorial" %></li>
-        	<li><a href="http://www.sebrae.com.br/momento/quero-melhorar-minha-empresa/utilize-as-ferramentas/formacao-de-precos/" target="_new">Sebrae</a></li>
-          <li><a href="http://www.vpsa.com.br" target="_new">VPSA</a></li>
-        </ul>
-       </div>
-      </div>
-    </header>
 
 <head>
 	<meta charset="utf-8">
@@ -29,7 +17,7 @@
 <p />
 <p />
 
-	<div id="swiffycontainer" style="width: 550px; height: 400px;"></div>
+	<div id="swiffycontainer" style="width: 550px; height: 400px; position: relative; top: 80px"></div>
 
 	<script>
 	var stage = new swiffy.Stage(document.getElementById('swiffycontainer'), swiffyobject);

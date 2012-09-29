@@ -7,6 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<header class="navbar navbar-fixed-top">
+	    <div class="navbar-inner">
+	      <div class="container">
+	        <ul class="nav">
+	        	<li><%= link_to "Simulação de Preços", "/simulacao_produtos"  %></li>
+	        	<li><%= link_to "Como Calcular", "/tutorial"  %></li>
+        	<li><a href="http://www.sebrae.com.br/momento/quero-melhorar-minha-empresa/utilize-as-ferramentas/formacao-de-precos/" target="_new">Sebrae</a></li>
+	          <li><a href="http://www.vpsa.com.br" target="_new">VPSA</a></li>
+            <li><%= button_to "Sair", oauth_logout_path, :class => 'btn',:method => :delete %>
+            </li>
+	        </ul>
+	       </div>
+	      </div>
+	    </header>
 
 <%= yield %>
 
