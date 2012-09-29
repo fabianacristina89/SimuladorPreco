@@ -6,6 +6,7 @@ SimuladorPreco::Application.routes.draw do
   get "oauth/authorization"
   get "oauth/callback"
   get "simulacao_produtos/proxima_pagina"
+  get "simulacao_produtos/pagina_anterior"
   get "simulacao_produtos/index"
   delete "oauth/logout"
 
